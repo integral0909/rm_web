@@ -1,0 +1,198 @@
+<div class="loader" ng-hide="dataLoaded">
+	<div class="flip">
+		<div class="front"></div>
+		<div class="back"></div>
+	</div>
+</div>
+<div ng-if="checkLocationValues()" id="g-maps"></div>
+<div class="returned-header only-mobile">
+	<h3>{{displayBusiness.name}} <span class="display-obj">${{displayBusiness.providerPrice}}</span></h3>
+</div>
+
+<div class="container animated fadeIn details" ng-show="dataLoaded">
+	<div class="row">
+		<div class="12u">
+			<div class="provider-content">
+				<div class="row">
+					<div ng-if="photos.length !== 0" class="4u">
+						<button class="btn-photo mobile-only-btn" ng-click="showPhoto()"><i class="icon-photo"></i> {{btnText}}</button>
+						<img ng-src="{{photos.url}}" class="bizPhoto animated" ng-show="photo" ng-class="photo ? 'fadeIn' : 'fadeOut'" />
+					</div>
+					<div ng-class="photos.length !== 0 ? '4u' : '8u'" style="padding-right: 10px; border-right: 1px solid #eee;">
+						<div class="12u">
+							<h3 class="detail-title">{{business.name}} <small class="affiliation">{{business.affiliation}}</small></h3>
+							<div class="row">
+								<div class="6u" style="display: inline-block;">							
+									<h4 class="detail-sub">{{specialties}}</h4>
+								</div>
+								<div class="6u" style="display: inline-block;">
+									<strong ng-if="business.rating"><small>Overall rating:</small></strong>
+									<span class="list-rating" ng-bind-html="business.rating">
+										<span ng-repeat="i in range(0, overAllRating)" ng-class="icon-circle"></span>
+										<span ng-if="needsHalf == 1" ng-class="icon-half"></span>
+										<span ng-repeat="i in range(0, 5 - needsHalf - overAllRating)" ng-class="icon-half"></span>
+									</span>
+									<small class="businessRating">{{business.overallAvg}}</small>
+									<br>
+									<strong ng-if="business.bedsideManner"><small>Bedside Manner:</small></strong>
+									<span class="list-rating" ng-bind-html="business.bedsideManner">
+										<span ng-repeat="i in range(0, overAllRating)" ng-class="icon-circle"></span>
+										<span ng-if="needsHalf == 1" ng-class="icon-half"></span>
+										<span ng-repeat="i in range(0, 5 - needsHalf - overAllRating)" ng-class="icon-half"></span>
+									</span>
+									<small class="businessRating">{{business.bedAvg}}</small>
+									<br>
+									<strong ng-if="business.waitTime"><small>Wait Time:</small></strong>
+									<span class="list-rating" ng-bind-html="business.waitTime">
+										<span ng-repeat="i in range(0, overAllRating)" ng-class="icon-circle"></span>
+										<span ng-if="needsHalf == 1" ng-class="icon-half"></span>
+										<span ng-repeat="i in range(0, 5 - needsHalf - overAllRating)" ng-class="icon-half"></span>
+									</span>
+									<small class="businessRating">{{business.waitAvg}}</small>
+								</div>
+							</div>
+							<div class="12u detail-meta">
+								<address ng-show="business.addr1 !== undefined" ng-cloak>
+									<i class="icon-compass detail-icon"></i> <a href="http://maps.google.com/?q={{business.addr1}} {{business.city}} {{business.state}}" target="_blank" ng-click="gaMaps(business.name)">{{business.addr1}} {{business.city}}, {{business.state}}</a>
+								</address>
+								<i class="icon-phone detail-icon"></i> <a class="phone" href="tel:+1{{business.phone}}" ng-click="gaPhone(business.name)">{{business.phone | tel}}</a><br/>
+								<a ng-if="business.website" ng-href="{{business.website}}" ng-click="gaConversion(business)" target="_blank">{{business.website}}</a>
+							</div>
+							<hr>
+							<p class="details">{{business.description1}}</p>
+						</div>
+					</div>
+					<div class="4u sticky" ng-if="singleItem">
+						<h3 class="result-title">{{displayBusiness.name}} <strong style="float: right; font-weight: 300; font-size: 100%;">${{displayBusiness.providerPrice}}</strong></h3>
+						<p class="details" ng-show="displayBusiness.providerDescription !== undefined">{{displayBusiness.providerDescription}}</p>
+					</div>
+
+					<div class="4u sticky" ng-if="!singleItem">
+						<ul>
+							<li ng-repeat="treatment in business.treatmentData">
+								<h3 class="result-title">{{treatment.name}} <strong ng-if="treatment.providerPrice" style="float: right; font-weight: 300; font-size: 100%;">${{treatment.providerPrice}}</strong></h3>
+							</li>
+							<li ng-repeat="surgery in business.surgeryData">
+								<h3 class="result-title">{{surgery.name}} <strong ng-if="surgery.providerPrice" style="float: right; font-weight: 300; font-size: 100%;">${{surgery.providerPrice}}</strong></h3>
+							</li>
+						</ul>
+					</div>
+
+					<div class="8u desk-only" style="padding-right: 10px; border-right: 1px solid #eee;"> 
+						<div id="tab-box">
+							<div ng-if="insurances.length > 0" class="specialty">
+								<span class="tab-title"><!--<i class="icon-insurance detail-icon"></i>--> <strong>Insurance</strong></span>
+								<div class="tab-contents">
+									{{insurances}}
+								</div>
+								<hr>
+							</div>
+							<div ng-if="associations.length > 0" class="specialty">
+								<span class="tab-title"><!--<i class="icon-group detail-icon"></i>--> <strong>Affilliations</strong></span>
+								<div class="tab-contents">
+									{{associations}}
+								</div>
+								<hr>
+							</div>
+							<div ng-if="educations.length > 0" class="specialty">
+								<span class="tab-title"><!--<i class="icon-education detail-icon"></i>--> <strong>Education</strong></span>
+								<div class="tab-contents">
+									{{educations}}
+								</div>
+								<hr>
+							</div>
+							<div ng-if="business.monFriHoursOpening !== undefined && business.monFriHoursClosing !== undefined" class="specialty">
+								<span class="tab-title"><!--<i class="icon-clock detail-icon"></i>--> <strong>Hours</strong></span>
+								<div class="tab-contents">
+									<ul ng-if="business.monFriHoursOpening !== undefined && business.monFriHoursClosing !== undefined ">
+										<li>
+										</li>
+										<li>
+											<strong>Mon-Fri </strong> {{business.monFriHoursOpening}} - {{business.monFriHoursClosing}}
+										</li>
+											<strong>Saturday </strong>
+											<span ng-show="business.satHoursOpening !== undefined && business.satHoursClosing !== undefined" ng-cloak>{{business.satHoursOpening}} - {{business.satHoursClosing}}</span>
+											<span ng-show="business.satHoursOpening === undefined && business.satHoursClosing !== undefined" ng-cloak>Closed</span>
+										</li>
+										<li>
+											<strong>Sunday</strong>
+											<span ng-show="business.sunHoursOpening !== undefined && business.sunHoursClosing !== undefined" ng-cloak>{{business.sunHoursOpening}} - {{business.sunHoursClosing}}</span>
+											<span ng-show="business.sunHoursOpening === undefined && business.sunHoursClosing !== undefined" ng-cloak>Closed</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="12u" ng-controller="ValidateFormController">
+				<span class="comments-head"><strong>Reviews</strong></span>
+				<div id="tmp-container"></div>
+				<div id="posts-container">
+					<div class="comment-post" ng-repeat="comment in comments">
+						<small class="date">{{comment.postDate}}</small>
+						<span class="post-name">{{comment.postName}}</span>
+						<div class="rating">
+							<span class="icon-circle" ng-repeat="rating in range(comment.rating)"></span>
+							<small class='comment-rating'>{{comment.rating}} / 5</small>
+						</div>
+						<p class="comment-data">{{comment.comment}}</p>
+					</div>
+				</div>
+			<form name="ratingForm" class="ratingForm" novalidate>
+				<textarea id="comment"
+				class="txt-comment"
+				rows="3"
+				name="comment"
+				ng-model="comment.text"
+				placeholder="Write a comment..."
+				required></textarea>
+
+				<div class="error-container"
+					ng-show="ratingForm.comment.$invalid && ratingForm.submitted">
+						<small class="error"
+						ng-show="ratingForm.comment.$error.required">
+						A comment is required.
+					</small>
+				</div>
+
+				<div class="all-ratings">
+					<div id="overallRating" class="rating-sub">
+						<span><strong>Overall Rating <span class="required">*</span></strong></span>
+						<div>
+							<span ng-repeat="rating in form.rating">
+								<input type="checkbox" name="comment.rating" ng-model="rating.ratingModel" id="{{rating.name}}" ng-click="checkRating(rating.value)" ng-value="rating.value">
+								<label for="{{rating.name}}">1</label>
+							</span>
+						</div>
+					</div>
+
+					<div id="besideManner" class="rating-sub">
+						<span><strong>Beside Manner <span class="required">*</span></strong></span>
+						<div>
+							<span ng-repeat="bedside in form.bedside">
+								<input type="checkbox" name="comment.bedside" ng-model="bedside.bedside_model" id="{{bedside.name}}" ng-click="checkBedside(bedside.value)" ng-value="bedside.value">
+								<label for="{{bedside.name}}">1</label>
+							</span>
+						</div>
+					</div>
+
+					<div id="waitTime" class="rating-sub">
+						<span><strong>Wait time <span class="required">*</span></strong></span>
+						<div>
+							<span ng-repeat="time in form.time">
+								<input type="checkbox" name="comment.time" id="{{time.name}}" ng-model="time.time_model" ng-click="checkTime(time.value)" ng-value="time.value">
+								<label for="{{time.name}}">1</label>
+							</span>
+						</div>
+					</div>
+					<div class="rating-sub">
+							<button class="btn-call" type="submit" id="post-comment" ng-click="validateForm()">Post comment</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

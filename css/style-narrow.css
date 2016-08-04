@@ -1,0 +1,40 @@
+/*.view-body h1 
+{
+	margin-left: 12px;
+}*/
+
+.toggle-alphabet li:first-child, .cond-toggle-alphabet li:first-child
+{
+	margin-left: 2px;
+}
+
+.toggle-alphabet li a, .cond-toggle-alphabet li a
+{
+	padding: 6px 10px;
+}
+
+#main-site h1
+{
+	font-size: 48px;
+}
+
+#main-site h2
+{
+	font-size: 24px;
+}
+
+#main-site h3
+{
+	font-size: 21px;
+}
+
+#main-site #header h2 
+{
+	font-size: 2rem;
+}
+
+#main-site .odd,#main-site  .even,#main-site  .heading,#main-site  .extra-info,#main-site  .fix
+{
+	padding-left: 16px;
+	padding-right: 16px;
+}

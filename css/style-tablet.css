@@ -1,0 +1,306 @@
+body {
+	font-size: 18px;
+	min-height: 85.5vh;
+}
+
+#tagline { color: #f7f7f7;  margin-top: 0; overflow: hidden; }
+
+#tagline .read-more {
+    margin: 7% 2.2%;
+    font-size: 1em;
+}
+
+#main-site{
+	margin: 20px;
+}
+
+#main-container{
+	padding: 20px;
+}
+
+.mobile-only { display: block !important; }
+.navigation { display: none; }
+.mobile-only-btn { display: none; }
+
+nav { padding: 0; }
+#logo { margin-top: 0; margin-left: 20px; }
+
+.mobile-menu {
+	position: absolute;
+	right: 24px;
+	top: 2px;
+	font-size: 24px;
+	color: #000000;
+    margin-right: 0;
+    margin-top: 10px;
+	padding: 12px;
+	cursor: pointer;
+}
+
+.mobile-dd-menu {
+	text-align: left;
+	position: absolute;
+	background-color: #f05323;
+	top: 85px;
+	left: 0;
+	right: 0;
+	font-size: 16px;
+	margin: 0 20px;
+}
+
+.mobile-dd-menu li {
+	border-bottom: 1px solid #e04e22;
+	float: none !important;
+}
+
+.mobile-dd-menu li a {
+	padding: 12px;
+	display: block;
+	width: 100%;
+	color: #f7f7f7;
+}
+
+.mobile-dd-menu li ul li a{
+	color: #777;
+}
+
+.mobile-dd-menu li:first-child { border-top: 1px solid #e04e22; }
+.mobile-dd-menu li:last-child { border: none; }
+
+.mobile-dd-menu li:hover, .mobile-dd-menu li:active, .mobile-dd-menu li:focus {
+	background-color: #e04e22;
+	-webkit-transition: background-color 300ms linear;
+	-moz-transition: background-color 300ms linear;
+	transition: background-color 300ms linear;
+}
+
+.mobile-dd-menu li i { margin-right: 12px; }
+.mobile-dd-menu li i.icon-procedures, .mobile-dd-menu li i.icon-conditions { margin-right: 6px; }
+
+.contents-wrapper { margin-top: 65px; }
+
+#intro-box {
+	width: 80%;
+	margin: 100px auto;
+}
+.drop-down {
+	width: 100%;
+}
+
+.app_buttons{
+	width: 100%;
+}
+
+.app_buttons a{
+	margin: 10px auto;
+	display: block;
+}
+
+#selected-option{
+	border: none;
+	background-color: transparent;
+}
+
+.header-icon {
+	font-size: 1.5rem;
+	text-align: center;
+	background-color: transparent;
+	color: #f7f7f7;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	display: inline-block;
+	width: 0;
+	height: 0;
+	padding: 0;
+	margin-right: 24px;
+}
+
+.patients {
+	margin-left: 12px;
+	margin-top: 12px;
+}
+
+
+.toggle-alphabet, .cond-toggle-alphabet
+{
+	font-size: 14px;
+	margin: 0;
+}
+
+.toggle-alphabet li, .cond-toggle-alphabet li { padding: 8px 8px 8px 9px; }
+
+
+.returned-header {
+	background-color: #2b88b7;
+	padding: 6px 12px;
+	position: relative;
+	font-size: 1.25rem;
+	color: #f7f7f7;
+}
+
+.returned-header h1 {
+	font-size: 1.563rem;
+}
+
+.results-header {
+	margin-top: 24px;
+}
+
+.extra-results {
+	background-color: #eee;
+	color: #777 !important;
+}
+
+#g-maps {
+	margin-top: 59px;
+}
+
+.sticky, .detail-meta { padding: 0; margin-right: 12px; }
+.sticky { margin-top: 24px; }
+
+.sticky p { font-size: 0.85rem; }
+
+.desk-only{
+	margin-left: 12px;
+}
+
+.comments-head{
+	margin-left: 12px;
+}
+
+.navigation li.mobile_app.is-home{
+	margin-right: 72px;
+	width: 14%;
+}
+
+.navigation li.mobile_app.is-home a{
+	padding: 20% 30%;
+	font-size: 1.25em;
+	font-weight: 700;
+}
+
+.sort-results, .sort-mobile { padding: 0 12px;}
+
+#sort-provider { margin-left: 12px; }
+#sort-cost { margin-right: 12px; }
+
+.found-results, #expand, #desc-body p { padding: 0 12px; }
+
+#desc-body {
+	margin-top: 12px;
+}
+
+.detail-sub, .result-title { font-size: 18px; }
+
+.details { font-size: 16px; }
+
+#review-wrapper { margin: 0 12px 90px 12px; }
+
+#main-site .subscribe{
+	padding: 0px 16px;
+}
+
+.mobile-only-table{
+	width: 93%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.provider-content { padding: 0; margin-left: 12px; margin-top: 24px; }
+
+
+
+.filter-list { display: none; }
+
+
+.navigation::-webkit-input-placeholder
+{
+	color: #ffffff;
+}
+
+.navigation::-moz-input-placeholder
+{
+	color: #ffffff;
+}
+
+.navigation:-moz-input-placeholder
+{
+	color: #ffffff;
+}
+
+.navigation ::placeholder{
+	color: #ffffff;
+}
+
+::-webkit-input-placeholder, :-moz-placeholder, ::-moz-placeholder, :-ms-input-placeholder{
+	color: #ffffff;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #ffffff;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #ffffff;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #ffffff;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #ffffff;
+}
+:placeholder-shown { /* Standard (https://drafts.csswg.org/selectors-4/#placeholder) */
+  color:    #ffffff;
+}
+
+#top-part{
+	background-size: 200%;
+    margin: 0 20px 30px;
+    height: 34vh;
+}
+
+#body{
+	padding-top: 85px;
+}
+
+#main-site .feature{
+	width: 48%;
+	margin: 1%;
+}
+
+#main-site .feature:nth(2n){
+	margin-right: 0;
+}
+
+#main-site .feature:nth(2n+1){
+	margin-left: 0;
+}
+
+footer{
+	margin: 0 20px;
+}
+
+footer ul li.about_li {
+	width: 350px;
+	position: absolute;
+	left: 50%;
+	margin-left: -85px;
+}
+
+.search-li{
+	position: relative;
+}
+
+#selected-option, #selected-option-mobile{
+	background-color: transparent;
+    border: none;
+    color: #000000;
+	font-size: 16px;
+	width: 100%;
+	text-transform: none;
+}
+
+#selected-option:focus, #selected-option-mobile:focus{
+	width: 100%;
+}

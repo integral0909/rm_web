@@ -1,0 +1,26 @@
+<div class="loader" ng-hide="dataLoaded">
+    <div class="flip">
+        <div class="front"></div>
+        <div class="back"></div>
+    </div>
+</div>
+<div class="contents-wrapper animated fadeIn">
+    <div class="list-content">
+        <div class="container">
+            <div class="row">
+                <div class="12u">
+                    <div class="returned-header">
+                        <h2>
+                            Surgeries
+                        </h2>
+                    </div>
+                    <ul class="returned-list" ng-show="dataLoaded">
+                        <li id="{{category.name}}" ng-repeat="category in categories| orderBy:'order' | filter: lowercase" class="animated fadeIn">
+                            <a ng-href="/surgery-categories/{{category.url}}" ng-click="gaSurgeryCategories(category.name)">{{category.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

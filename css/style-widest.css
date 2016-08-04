@@ -1,0 +1,130 @@
+body
+{
+	font-size: 21px;
+}
+
+
+/**************************************
+Queries
+**************************************/
+#mobile-select { display: none; }
+.alpha-toggle-mobile, .alpha-cond-toggle-mobile { display: none; }
+
+.mobile-only { display: none; }
+.mobile-only-btn { display: none; }
+
+#intro-box {
+	width: 90%;
+	margin: 130px auto;
+}
+
+.header-icon {
+	font-size: 1.5rem;
+	text-align: center;
+	background-color: #2b88b7;
+	color: #f7f7f7;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	padding: 6px;
+}
+
+#main-site h1
+{
+	font-size: 3.3333rem; /* ~70px */
+}
+
+#main-site h2
+{
+	font-size: 2rem; /* 42px */
+}
+
+#main-site h3
+{
+	font-size: 1.666rem; /* ~34px */
+}
+
+nav, nav div, #logo{
+	height: 70px;
+}
+
+.navigation, .dd-navigation{
+	font-size: 1.1em;
+}
+
+#selected-option{
+	font-size: 21px;
+}
+
+.navigation li a{
+	margin: 27px 0;
+	font-size: 21px;
+}
+
+.row .navigation li a{
+	margin: 17px 0;
+}
+
+.navigation li.mobile_app{
+	heigth: 70px;
+}
+
+.navigation li.mobile_app a{
+	width: 100%;
+    padding: 16% 0;
+    font-size: 1em;
+    line-height: 2.15em;
+	margin: 0;
+}
+
+#tagline{
+	position: absolute;
+    bottom: 30px;
+    right: 10px;
+}
+
+#tagline h2{
+	font-size: 2em;
+}
+
+#tagline .read-more {
+    margin: 1.5% 2.6%;
+    font-size: 1.3em;
+}
+
+#main-site .feature h4{
+	font-size: 20px;
+	padding: 15px 15px 10px;
+}
+
+#main-site .feature .price-range{
+	font-size: 20px;
+	top: 15px;
+	right: 15px;
+}
+
+#main-site .description{
+	padding: 0 15px;
+	font-size: 16px;
+	margin-bottom: 15px;
+}
+
+#main-site a{
+	margin: 10px 15px 15px;
+    font-size: 17px;
+}
+
+#body{
+	padding-top: 70px;
+}
+
+#main-site .feature{
+	min-height: 33vh;
+    margin-bottom: 30px;
+}
+
+.navigation li.mobile_app.is-home a{
+	line-height: 1.3em;
+}

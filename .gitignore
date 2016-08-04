@@ -1,0 +1,17 @@
+.idea
+.DS_Store
+*.iml
+*.log
+components/
+node_modules/
+build/
+mongo_dumps
+procedures.csv
+prevention.json
+conditions.json
+businesses.csv
+conditions.csv
+treatments.json
+surgeries.json
+.env
+

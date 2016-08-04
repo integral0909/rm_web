@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="rokketMed" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="rokketMed" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="rokketMed" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="rokketMed" class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title ng-bind="siteTitle">RokketMed</title>
+
+	<base href="/" />
+
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="apple-touch-icon" sizes="72x72" href="favicon-72.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="favicon-144.png">
+	<meta name="description" content="RokketMed is your site to shop for your healthcare needs. We know choice, quality and price matters so we at RokketMed are making it simple for you to shop.">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- build:css -->
+	<link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
+	<link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link href="css/animations.css" rel="stylesheet" type="text/css">
+	<link href="css/animate.css" rel="stylesheet" type="text/css">
+	<!-- endbuild -->
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet" type="text/css">
+
+	<script src="js/skel.min.js"></script>
+	<script>
+	skel.init({
+		prefix: 'css/style',
+		resetCSS: true,
+		boxModel: 'padding',
+		grid: { gutters: 20 },
+		breakpoints: {
+			hd: { range: '1600-', containers: 1200, grid: { gutters: 60 } },
+			widest: { range: '-1599', containers: 1200, grid: { gutters: 60 } },
+			wide: { range: '-1199', containers: 1000, grid: {gutters: 40 } },
+			tablet: {range: '-877', containers: 'fluid', grid: {gutters: 20 } },
+			mobile: { range: '-480', containers: 'fluid', lockViewport: true, grid: { collapse: true } }
+		}
+	});
+	</script>
+</head>
+<body ng-controller="MainController" ng-cloak ng-class="{'modal-open': modal_opened, 'hidden': !dataLoaded}">
+	<div>
+		<div class="container">
+			<nav>
+				<div class="row">
+					<div class="3u">
+						<a id="logo" href="/">RokketMed</a>
+						<span class="mobile-menu mobile-only" ng-click="revealMobile()">&#9776;</span>
+					</div>
+					<div class="9u">
+						<ul class="navigation">
+							<li><a href="/treatments" ng-click="gaServices('Treatments')"> Treatments</a></li>
+							<li><a href="/surgeries-categories" ng-click="gaServices('Surgeries')"> Surgeries</a></li>
+							<li>
+								<form ng-submit="searchFor(1)">
+									<input id="selected-option" ng-model="search.selected_option" autocomplete="off" ng-focus="showDropdownList()" ng-change="searchFor(2)" placeholder="SEARCH"/>
+								</form>
+								<ul ng-if="!hideDropdown" class="base-drop-down drop-down active">
+									<li ng-repeat="result in results" >
+										<a ng-click="clearSearch()" ng-if="result.type != 'business'" ng-href="/{{result.type}}/{{result.name}}">
+											{{result.name}}
+											<label class="search-label"><strong>{{result.title}}</strong></label>
+										</a>
+										<a ng-click="clearSearch()" ng-if="result.type == 'business'" ng-href="/{{result.type}}/{{result.name}}/{{result.id}}">
+											{{result.name}}
+											<label class="search-label"><strong>{{result.title}}</strong></label>
+										</a>
+									</li>
+								</ul>
+							</li>
+							<li ng-class="{'is-home': isHome}" class="mobile_app"><a href="https://itunes.apple.com/us/app/rokketmed/id1024147868?mt=8" ng-href="https://{{mobile_link}}" class="app_link"> Get the app</a></li>
+							<li class="right_menu" ng-show="!isSignedIn"><a class="nav-login" ng-click="toggleLogin()"> Log in</a></li>
+							<li class="right_menu" ng-if="isSignedIn"><a class="nav-login" ng-click="logout()"> Log out</a></li>
+							<li class="right_menu" ng-if="isSignedIn"><a ng-click="toggleSettings()"> Settings</a></li>
+						</ul>
+						<ul class="mobile-dd-menu animated" ng-show="visible" ng-cloak>
+							<li><a href="/treatments" ng-click="gaServices('Treatments')"> Treatments</a></li>
+							<li><a href="/surgeries-categories" ng-click="gaServices('Surgeries')"> Surgeries</a></li>
+							<li class="search-li">
+								<form ng-submit="searchFor(1)">
+									<input id="selected-option-mobile" ng-model="search.selected_option" autocomplete="off" ng-change="searchFor(2)" placeholder="SEARCH"/>
+								</form>
+								<ul ng-if="hideDropdown" class="base-drop-down drop-down active">
+									<li ng-repeat="result in results" >
+									  <a ng-click="clearSearch()" ng-if="result.type != 'business'" ng-href="/{{result.type}}/{{result.name}}">
+										{{result.name}}
+										<label class="search-label"><strong>{{result.title}}</strong></label>
+									  </a>
+									  <a ng-click="clearSearch()" ng-if="result.type == 'business'" ng-href="/{{result.type}}/{{result.name}}/{{result.id}}">
+									 	{{result.name}}
+										<label class="search-label"><strong>{{result.title}}</strong></label>
+									  </a>
+									</li>
+								</ul>
+							</li>
+							<li><a href="https://itunes.apple.com/us/app/rokketmed/id1024147868?mt=8" ng-href="https://{{mobile_link}}" class="app_link"> Get the app</a></li>
+							<li ng-show="!isSignedIn"><a class="nav-login" ng-click="toggleLogin()"> Log in</a></li>
+							<li ng-if="isSignedIn"><a ng-click="logout()"> Log out</a></li>
+							<li ng-if="isSignedIn"><a ng-click="toggleSettings()"> Settings</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+
+	<!--[if lt IE 7]>
+	<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+
+	<div id="main-container" ng-class="{'is-home': isHome}">
+		<div id="body" ng-view autoscroll="true"></div>
+	</div>
+
+	<footer>
+		<ul>
+			<li>
+				<span class="copyright">&copy; 2016</span>
+				<a href="/terms">Terms</a>
+				<a href="/privacy">Privacy</a>
+			</li>
+			<!-- REMOVED UNTIL ABOUT PAGE: <li class="about_li" ng-click=""><span class="about">About</span></li> -->
+			<li class="about_li"><span class="about">Your health. Your money. Your choice</span></li>
+			<li><a href="https://twitter.com/rokketmed" class="twitter-social" target="_blank" ></a></li>
+		</ul>
+		<div class="clear"></div>
+	</footer>
+
+	<modal show='modalLogin' width='450px' ng-cloak>
+		<div class="modal-header">
+			<h3>Log in</h3>
+		</div>
+		<form role="form">
+			<input id="log-user" ng-model="user.username" type="text" placeholder="Username" autocapitalize="off" />
+			<input id="log-pwd" ng-model="user.password" type="password" placeholder="Password" />
+			<span ng-show="errors.login" class="login-error err hidden">Username or password is incorrect</span>
+
+			<button ng-click="login()" class="form-btn login" type="button">Log in</button>
+			<button ng-click="toggleSignup()" class="form-btn signup" type="button">Sign up</button>
+			<p><small><a ng-click="toggleResetPassword()">forgot password?</a></small></p>
+		</form>
+	</modal>
+
+	<modal show='modalSignup' width='450px' ng-cloak>
+		<div class="modal-header">
+			<h3>Sign up</h3>
+		</div>
+		<form role="form">
+			<div id="base-err" ng-show="errors.signBase" >
+				<span ng-repeat="err in errors.signBase">{{err}}<br/></span>
+			</div>
+			<input id="su-user" ng-model="user.signUser" ng-class="{error: errors.signUser}" type="text" placeholder="Username" autocapitalize="off" />
+			<div id="user-err" ng-show="errors.signUser" >
+				<span ng-repeat="err in errors.signUser">{{err}}<br/></span>
+			</div>
+
+			<input id="su-email" ng-model="user.signEmail" ng-class="{error: errors.signEmail}" type="email" placeholder="Email address" autocapitalize="off" />
+			<div id="email-err" ng-show="errors.signEmail" >
+				<span ng-repeat="err in errors.signEmail">{{err}}<br/></span>
+			</div>
+
+			<input id="su-pwd" ng-model="user.signPass" ng-class="{error: errors.signPass}"  type="password" placeholder="Password" />
+			<div id="pass-err" ng-show="errors.signPass" >
+				<span ng-repeat="err in errors.signPass">{{err}}<br/></span>
+			</div>
+
+			<button class="form-btn signup" type="button" ng-click="signup()">Confirm</button>
+			<button class="form-btn login" type="button" ng-click="toggleLogin()">Back to log in</button>
+		</form>
+	</modal>
+
+	<modal show='modalSettings' width='450px' ng-cloak>
+		<div class="modal-header">
+			<h3>Settings</h3>
+		</div>
+
+		<ul class="user-info">
+			<li><i class="icon-user"></i> <span>{{user.username}}</span></li>
+			<li><i class="icon-globe"></i> <span>{{user.email}}</span></li>
+			<li>
+				<i class="icon-office"></i>
+				<span  id="employer-label" ng-if="!isOpenSelection('employer')" >{{user.employer || "Employer"}}</span>
+				<input id="employer" ng-if="isOpenSelection('employer')" ng-model="user.employer" class="settings-input" type="text" placeholder="Employer" />
+				<a ng-click="editSelection('employer')" class="user-btn">Edit</a>
+			</li>
+			<li><i class="icon-gender"></i> <span id="gender">Gender</span> <a ng-click="editSelection('gender')" class="user-btn">Edit</a></li>
+			<li ng-show="isOpenSelection('gender')">
+				<label ng-class="{'active': user.gender=='Male'}">
+					<input type="radio" class="gender edit-btn" ng-model="user.gender" value="Male">
+					Male
+				</label>
+				<label ng-class="{'active': user.gender=='Female'}">
+					<input type="radio" class="gender edit-btn" ng-model="user.gender" value="Female">
+					Female
+				</label>
+			</li>
+			<li><i class="icon-profile"></i> <span id="age">Age</span> <a ng-click="editSelection('age')" class="user-btn">Edit</a></li>
+			<li ng-show="isOpenSelection('age')">
+				<label ng-class="{'active': user.age=='18-24'}">
+					<input type="radio" class="gender edit-btn" ng-model="user.age" value="18-24">
+					18-24
+				</label>
+				<label ng-class="{'active': user.age=='25-31'}">
+					<input type="radio" class="gender edit-btn" ng-model="user.age" value="25-31">
+					25-31
+				</label>
+				<label ng-class="{'active': user.age=='32-38'}">
+					<input type="radio" class="gender edit-btn" ng-model="user.age" value="32-38">
+					32-38
+				</label>
+				<label ng-class="{'active': user.age=='39-48+'}">
+					<input type="radio" class="gender edit-btn" ng-model="user.age" value="39-48+">
+					39-48+
+				</label>
+			</li>
+			<li>
+				<a class="form-btn signup" ng-click="saveSettings()">Save</a>
+				<strong id="saved" ng-class="{hidden: notification}" class="notification">Settings saved</strong>
+			</li>
+		</ul>
+	</modal>
+	<modal show="modalResetPassword" width="450px" ng-cloak>
+		<div class="modal-header">
+			<h3>Reset password</h3>
+		</div>
+		<form role="form">
+			<input ng-model="user.email" id="reset-email" type="email" placeholder="Email address" autocapitalize="off" />
+			<span id="successReset" ng-show="passwordSent">Password recovery sent</span>
+			<span id="errorReset" ng-show="errors.passwordSent">{{errors.passwordSent}}</span>
+
+			<button ng-click="resetPassword()" class="form-btn signup" type="button"><strong>Confirm</strong></button>
+		</form>
+	</modal>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-58429315-4', 'auto');
+ga('send', 'pageview');
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjcqCylteTj7r4BpOoGKvFWcdHd0o-UDA"></script>
+<!-- build:js -->
+<script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-scroll/angular-scroll.min.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/lodash/lodash.min.js"></script>
+<script src="bower_components/angularytics/dist/angularytics.js"></script>
+<script src="js/lib/jquery-2.1.3.min.js"></script>
+<script src="js/lib/quickblox.js"></script>
+<script src="js/lib/fastclick.js"></script>
+<script src="js/gmaps.js"></script>
+<script src="app.js"></script>
+<script src="services/getData.js"></script>
+<script src="services/quickblox.js"></script>
+<script src="services/locations.js"></script>
+<script src="directives/toggle-alphabet/toggle-alphabet-directive.js"></script>
+<script src="views/home/home.js"></script>
+<script src="views/treatments/treatments.js"></script>
+<script src="views/surgeries/categories.js"></script>
+<script src="views/surgeries/surgeries.js"></script>
+<script src="views/results/results.js"></script>
+<script src="views/details/details.js"></script>
+<script src="views/terms/terms.js"></script>
+<script src="views/search/search.js"></script>
+<script src="views/privacy/privacy.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/html5shiv.js"></script>
+<!-- endbuild -->
+</body>
+</html>

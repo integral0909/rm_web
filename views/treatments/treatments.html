@@ -1,0 +1,33 @@
+<div class="loader" ng-hide="dataLoaded">
+	<div class="flip">
+		<div class="front"></div>
+		<div class="back"></div>
+	</div>
+</div>
+<div class="contents-wrapper animated fadeIn">
+	<div class="list-content">
+		<div class="container">
+			<div class="row">
+				<div class="12u">
+					<div class="returned-header">
+						<h2>
+							Treatments
+						</h2>
+					</div>
+					<div class="alphabet">
+						<toggle-alphabet></toggle-alphabet>
+						<div class="clear"></div>
+					</div>
+					<ul class="returned-list" ng-show="dataLoaded">
+						<li id="{{treatment.name}}" ng-repeat="treatment in treatments| orderBy:'name' | filter: lowercase" class="animated fadeIn">
+							<div><a ng-href="/treatments/{{treatment.url}}" ng-click="gaTreatments(treatment.name)">{{treatment.name}}</a></div>
+							<div><span class="patients">${{treatment.minPrice}} - ${{treatment.maxPrice}}</span></div>
+
+
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

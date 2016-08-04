@@ -1,0 +1,65 @@
+<div class="loader" ng-hide="dataLoaded">
+	<div class="flip">
+		<div class="front"></div>
+		<div class="back"></div>
+	</div>
+</div>
+<div class="contents-wrapper animated fadeIn" ng-show="dataLoaded">
+	<div class="container">
+		<div class="row">
+			<div class="12u">
+				<div class="results-header">
+					<h3 class="found-results">{{businesses.businessesCount}} results found for {{results.name}} within 50 miles</h3><p ng-if="minPrice > 0 && maxPrice > 0" class="patients">Patients pay ${{minPrice}} - ${{maxPrice}}</p>
+				</div>
+				<div id="desc-body">
+					<p>{{results.description}}</p>
+				</div>
+			</div>
+			<div class="12u">
+				<table class="12u mobile-only-table">
+					<tr class="sort-results">
+						<th class="prov-title 3u">
+							<small ng-click="sortGroupProps('mainBusiness.name')" class="{{sortbyRating}}">Provider <i class="icon-triangle-down"></i><i class="icon-triangle-up"></i></small>
+						</th>
+						<th class="dist-title 3u">
+							<small ng-click="sortGroupProps('mainBusiness.distance')" class="{{sortbyDistance}}">Distance <i class="icon-triangle-down"></i><i class="icon-triangle-up"></i></small>
+						</th>
+						<th class="dist-title 4u">
+							<small>Address</small>
+						</th>
+						<th class="cost-title 2u">
+							<small ng-click="sortGroupProps('mainBusiness.cost')" class="{{sortbyCost}}">Cost <i class="icon-triangle-down"></i><i class="icon-triangle-up"></i></small>
+						</th>
+					</tr>
+					<tbody ng-repeat="businessesGroup in businessesGroups | orderBy:['priority',sortBy]:reverse" ng-if="businessesGroup.mainBusiness.distance < 50">
+						<tr>
+							<td class="3u provider-info">
+								<a ng-href="/business/{{type}}/{{results.name}}/{{businessesGroup.mainBusiness.name}}/{{businessesGroup.mainBusiness._id}}">{{businessesGroup.mainBusiness.name}}</a>
+								<br>
+								<span ng-bind-html="businessesGroup.mainBusiness.rateDisplay"></span>
+								<button class="more-btn" ng-if="businessesGroup.businesses.length > 0" ng-click="showAllBusinesses(businessesGroup)">
+									<i class="icon-triangle-down animated" ng-show="!expanded[businessesGroup.mainBusiness.id]" ng-cloak></i>
+									<i class="icon-triangle-up animated" ng-show="expanded[businessesGroup.mainBusiness.id]" ng-cloak></i>
+								</button>
+
+							</td>
+							<td class="3u distance"><span ng-if="businessesGroup.mainBusiness.distance">{{businessesGroup.mainBusiness.distance}} miles away</span></td>
+							<td class="4u address"><strong>{{businessesGroup.mainBusiness.address}}</strong></td>
+							<td class="2u cost"><strong>${{businessesGroup.mainBusiness.cost}}</strong></td>
+						</tr>
+						<tr class="repeated-biz" ng-if="businessesGroup.visible && business.distance < 50" ng-repeat="business in businessesGroup.businesses | orderBy:sortBy:reverse">
+							<td class="3u provider-info">
+								<a ng-href="/business/{{type}}/{{results.name}}/{{business.name}}/{{business._id}}">{{business.name}}</a>
+								<br>
+								<span ng-bind-html="business.rateDisplay"></span>
+							</td>
+							<td class="3u distance"><span ng-if="business.distance">{{business.distance}} miles away</span></td>
+							<td class="3u address"><span>{{business.address}}</span></td>
+							<td class="3u cost"><strong>${{business.cost}}</strong></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,9 @@
+.toggle-alphabet li:first-child, .cond-toggle-alphabet li:first-child
+{
+	margin-left: 2px;
+}
+
+.toggle-alphabet li a, .cond-toggle-alphabet li a
+{
+	padding: 6px 12px;
+}

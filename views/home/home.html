@@ -1,0 +1,19 @@
+<section id="top-part">
+    <div class="row">
+      <div class="12u">
+        <header id="tagline">
+          <h2 class="stub">5 minutes will save you</br> 50% on healthcare</h2>
+        </header>
+      </div>
+    </div>
+</section>
+<div id="main-site">
+    <section id="app">
+		<div class="feature" ng-click="goTo(item.type,item.name)" ng-repeat="item in featuredItems" ng-class="{'last':$last}">
+			<h4>{{item.name | limitTo: 30}}</h4>
+			<p class="description">{{item.description | limitTo: 200}}{{(item.description.length>200)?"...":""}}</p>
+			<span class="price-range">${{item.minPrice}}</span>
+		</div>
+		<div class="clear"></div>
+    </section>
+</div>
